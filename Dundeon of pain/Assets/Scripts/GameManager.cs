@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public bool isPlayerTurn = true;
 
+    [SerializeField] private int entityNum = 0;
+
+    [SerializeField] private List<Entity> entities = new List<Entity>();
+
     public bool IsPlayerTurn { get => isPlayerTurn; }
 
     void Awake()
@@ -24,20 +28,40 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void StartTurn()
     {
-        Instantiate(Resources.Load<GameObject>("Player")).name = "Player";
+        if (entities[entityNum].GetComponent<Player>())
+            isPlayerTurn = true;
+        else if (entities[entityNum].IsSentient)
+            Action.SkipAction(entities[entityNum]);
     }
 
     public void EndTurn()
     {
-        isPlayerTurn = false;
-        StartCoroutine(WaitForTurns());
+        if(entities[entityNum].GetComponent<isPlayerTurn>())
+            isPlayerTurn = false;
+
+        if (entityNum == entities.Count - 1)
+            entityNum = 0;
+        else
+            entityNum++;
+
+        StartCoroutine(TurnDelay());
     }
 
-    private IEnumerator WaitForTurns()
+    private IEnumerator TurnDelay()
     {
         yield return new WaitForSeconds(time);
-        isPlayerTurn = true;
+        StartTurn();
+    }
+
+    public void AddEntity(Entity entity)
+    {
+        entities.Add(entity);
+    }
+
+    public void InsertEntity(Entity entity, int index)
+    {
+        entities.Insert(index, entity);
     }
 }

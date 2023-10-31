@@ -52,5 +52,20 @@ public class Player : MonoBehaviour
     {
         transform.position += (Vector3)controls.Player.Movement.ReadValue<Vector2>();
         GameManager.instance.EndTurn();
+        //Vector2 direction = controls.Player.Movement.ReadValue<Vector2>();
+        //Vector2 roundedDirection = new Vector2(Mathf.Round(direction.x), Mathf.Round(direction.y));
+        //Vector3 futurePosition = transform.position + (Vector3)roundedDirection;
+
+        //if (IsValidPosition(futurePosition))
+            //Action.MovementAction(GetComponent<Entity>(), roundedDirection);
+
     }
+
+    //private bool IsVatidPosition(Vector3 futurePosition)
+    //{
+        //Vector3Int gridPosition = MapManager.instance.FloorMap.WorldToCell(futurePosition);
+        //if (!MapManager.instance.InBounds(gridPosition.x, gridPosition.y) || MapManager.instance.ObstacleMap.HasTile(gridPosition) || futurePosition == transform.position)
+            //return false;
+        //return true;
+    //}
 }
