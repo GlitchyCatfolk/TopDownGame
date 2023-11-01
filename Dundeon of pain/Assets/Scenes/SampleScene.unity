@@ -358,6 +358,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 0.1
   isPlayerTurn: 1
+  entityNum: 0
+  entities: []
 --- !u!4 &1364382518
 Transform:
   m_ObjectHideFlags: 0
@@ -503,6 +505,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1829513267}
   - component: {fileID: 1829513266}
+  - component: {fileID: 1829513268}
   m_Layer: 0
   m_Name: MapManager
   m_TagString: Untagged
@@ -539,3 +542,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1829513268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829513265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 148ff652bff2a394cbe5334a465ae331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 80
+  height: 45
+  darkColor:
+    serializedVersion: 2
+    rgba: 0
+  lightColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  floorTile: {fileID: 11400000, guid: 3ef7c3e8f4a4b3542aab4101abbb24d2, type: 2}
+  wallTile: {fileID: 11400000, guid: 091ec1ef985417d4dad9603239f8e371, type: 2}
+  floorMap: {fileID: 1542070261}
+  obstacleMap: {fileID: 252167807}

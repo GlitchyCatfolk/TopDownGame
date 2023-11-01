@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private float time = 0.1f;
 
-    [SerializeField] public bool isPlayerTurn = true;
+    [SerializeField] private bool isPlayerTurn = true;
 
     [SerializeField] private int entityNum = 0;
 
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     public void EndTurn()
     {
-        if(entities[entityNum].GetComponent<isPlayerTurn>())
+        if(entities[entityNum].GetComponent<Player>())
             isPlayerTurn = false;
 
         if (entityNum == entities.Count - 1)
