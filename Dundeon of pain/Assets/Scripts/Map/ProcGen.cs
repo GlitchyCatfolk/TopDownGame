@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-sealed class NewBehaviourScript : MonoBehaviour
+sealed class ProcGen : MonoBehaviour
 {
     public void GenerateDungeon(int mapWidth,int mapHeight,int roomMaxSize,int roomMinSize,int maxRooms,List<RectangularRoom> rooms)
     {
@@ -40,11 +40,58 @@ sealed class NewBehaviourScript : MonoBehaviour
                     }
                 }
             }
-            if (MapManager.instance.Rooms.Count == 0)
+            //Короче, я понятия не имею, почему, но когда я просто спросил длину массива rooms вместо Rooms, все сразу заработало так, как надо.
+            //Хотя код я вроде без ошибок написал. Надеюсь, это не вызовет новые ошибки!
+            if (rooms.Count == 0)
             {
                 MapManager.instance.CreatePlayer(newRoom.Center());
             }
+            else
+            {
+                TunnelBetween(rooms[rooms.Count - 1], newRoom);
+            }
+
             rooms.Add(newRoom);
+        }
+    }
+
+    private void TunnelBetween(RectangularRoom oldRoom, RectangularRoom newRoom)
+    {
+        Vector2Int oldRoomCenter = oldRoom.Center();
+        Vector2Int newRoomCenter = newRoom.Center();
+        Vector2Int tunnelCorner;
+
+        if (Random.value < 0.5f)
+        {
+            tunnelCorner = new Vector2Int(newRoomCenter.x, oldRoomCenter.y);
+        }
+        else
+        {
+            tunnelCorner = new Vector2Int(oldRoomCenter.x, newRoomCenter.y);
+        }
+
+        List<Vector2Int> tunnelCoords = new List<Vector2Int>();
+        BresenhamLine(oldRoomCenter, tunnelCorner, tunnelCoords);
+        BresenhamLine(tunnelCorner, newRoomCenter, tunnelCoords);
+
+        for(int i= 0; i < tunnelCoords.Count; i++)
+        {
+            if(MapManager.instance.ObstacleMap.HasTile(new Vector3Int(tunnelCoords[i].x, tunnelCoords[i].y, 0)))
+            {
+                MapManager.instance.ObstacleMap.SetTile(new Vector3Int(tunnelCoords[i].x, tunnelCoords[i].y, 0), null);
+            }
+            MapManager.instance.FloorMap.SetTile(new Vector3Int(tunnelCoords[i].x, tunnelCoords[i].y, 0), MapManager.instance.FloorTile);
+
+            for(int x = tunnelCoords[i].x - 1; x <= tunnelCoords[i].x + 1; x++)
+            {
+                for (int y = tunnelCoords[i].y - 1; y <= tunnelCoords[i].y + 1; y++)
+                {
+                    if(SetWallTileIfEmpty(new Vector3Int(x, y, 0)))
+                    {
+                        continue;
+                    }
+                }
+            }
         }
     }
 
@@ -58,6 +105,33 @@ sealed class NewBehaviourScript : MonoBehaviour
         {
             MapManager.instance.ObstacleMap.SetTile(new Vector3Int(pos.x, pos.y, 0), MapManager.instance.WallTile);
             return false;
+        }
+    }
+
+    private void BresenhamLine(Vector2Int roomCenter, Vector2Int tunnelCorner, List<Vector2Int> tunnelCoords)
+    {
+        int x=roomCenter.x,y=roomCenter.y;
+        int dx = Mathf.Abs(tunnelCorner.x - roomCenter.x), dy = Mathf.Abs(tunnelCorner.y - roomCenter.y);
+        int sx=roomCenter.x<tunnelCorner.x?1:-1, sy=roomCenter.y<tunnelCorner.y?1:-1;
+        int err = dx - dy;
+        while (true)
+        {
+            tunnelCoords.Add(new Vector2Int(x, y));
+            if(x==tunnelCorner.x && y == tunnelCorner.y)
+            {
+                break;
+            }
+            int e2 = 2 * err;
+            if (e2 > -dy)
+            {
+                err -= dy;
+                x += sx;
+            }
+            if(e2 < dx)
+            {
+                err += dx;
+                y += sy;
+            }
         }
     }
 }
