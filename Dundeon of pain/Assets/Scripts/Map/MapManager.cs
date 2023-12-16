@@ -67,6 +67,11 @@ public class MapManager : MonoBehaviour
         ProcGen procGen = new ProcGen();
         procGen.GenerateDungeon(width, height, roomMaxSize, roomMinSize, maxRooms, rooms);
 
+        AddTileMapToDictionary(floorMap);
+        AddTileMapToDictionary(obstacleMap);
+
+        SetupFogMap();
+
         Instantiate(Resources.Load<GameObject>("NPC"), new Vector3(40 - 5.5f, 25 + 0.5f, 0), Quaternion.identity).name = "NPC";
 
         Camera.main.transform.position = new Vector3(40, 20.25f, -10);
@@ -82,7 +87,7 @@ public class MapManager : MonoBehaviour
 
     public void UpdateFogMap(List<Vector3Int> playerFOV)
     {
-        foreach(Vecotr3Int pos in visibleTiles)
+        foreach(Vector3Int pos in visibleTiles)
         {
             if (!tiles[pos].isExplored)
             {
@@ -103,7 +108,7 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    public void SetEntitiesVisiblities()
+    public void SetEntitiesVisibilities()
     {
         foreach(Entity entity in GameManager.instance.Entities)
         {
@@ -114,13 +119,13 @@ public class MapManager : MonoBehaviour
 
             Vector3Int entityPosition = floorMap.WorldToCell(entity.transform.position);
 
-            if (visibles.Contains(entityPosition))
+            if (visibleTiles.Contains(entityPosition))
             {
-                entity.GetComponent<SpriteRenderers>().enabled = true;
+                entity.GetComponent<SpriteRenderer>().enabled = true;
             }
             else
             {
-                entity.GetComponent<SpriteRenderers>().enabled = false;
+                entity.GetComponent<SpriteRenderer>().enabled = false;
             }
         }
     }
@@ -134,8 +139,16 @@ public class MapManager : MonoBehaviour
                 continue;
             }
             TileData tile = new TileData();
-            tiles.Add(tile);
+            tiles.Add(pos, tile);
         }
     }
-    //Остался последний метод!
+    
+    private void SetupFogMap()
+    {
+        foreach(Vector3Int pos in tiles.Keys)
+        {
+            fogMap.SetTile(pos, fogTile);
+            fogMap.SetTileFlags(pos, TileFlags.None);
+        }
+    }
 }
