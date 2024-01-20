@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3861559438167333374}
   - component: {fileID: 8615795119930166639}
   m_Layer: 0
-  m_Name: NPC
+  m_Name: Werewoof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 335837487
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -171941368, guid: 94a14551feb300143bfb18c453a7f14c, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.6706264, a: 1}
+  m_Sprite: {fileID: -164799610, guid: 94a14551feb300143bfb18c453a7f14c, type: 3}
+  m_Color: {r: 0.7311321, g: 1, b: 0.7747562, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

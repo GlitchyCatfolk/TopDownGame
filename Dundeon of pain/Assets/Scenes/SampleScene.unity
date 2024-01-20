@@ -315,7 +315,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -381538577
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60415aff13ff22641a9307ed24c08f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0.1
+  time: 0.005
   isPlayerTurn: 1
   entityNum: 0
   entities: []
@@ -680,6 +680,7 @@ MonoBehaviour:
   roomMaxSize: 10
   roomMinSize: 6
   maxRooms: 30
+  maxMonstersPerRoom: 2
   floorTile: {fileID: 11400000, guid: 3ef7c3e8f4a4b3542aab4101abbb24d2, type: 2}
   wallTile: {fileID: 11400000, guid: 091ec1ef985417d4dad9603239f8e371, type: 2}
   fogTile: {fileID: 11400000, guid: 92d8e7671f4b2b54fae4e019d2752f7a, type: 2}
