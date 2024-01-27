@@ -36,8 +36,7 @@ sealed class ProcGen : MonoBehaviour
                     }
                 }
             }
-            //Короче, я понятия не имею, почему, но когда я просто спросил длину массива rooms вместо Rooms, все сразу заработало так, как надо.
-            //Хотя код я вроде без ошибок написал. Надеюсь, это не вызовет новые ошибки!
+
             if (rooms.Count != 0)
             {
                 TunnelBetween(rooms[rooms.Count - 1], newRoom);
@@ -46,7 +45,7 @@ sealed class ProcGen : MonoBehaviour
             {
                 
             }
-            PlaceEntities(newRoom,maxMonstersPerRoom);
+            PlaceActors(newRoom,maxMonstersPerRoom);
 
             rooms.Add(newRoom);
         }
@@ -111,16 +110,16 @@ sealed class ProcGen : MonoBehaviour
         MapManager.instance.FloorMap.SetTile(pos, MapManager.instance.FloorTile);
     }
 
-    private void PlaceEntities(RectangularRoom newRoom, int maximumMonsters)
+    private void PlaceActors(RectangularRoom newRoom, int maximumMonsters)
     {
         int numberOfMonsters = Random.Range(0, maximumMonsters+1);
 
         for (int monster=0;monster<numberOfMonsters;monster++)
         {
-            int x = Random.Range(newRoom.x,newRoom.x+newRoom.width);
-            int y = Random.Range(newRoom.y, newRoom.x + newRoom.height);
+            int x = Random.Range(newRoom.X,newRoom.X+newRoom.Width);
+            int y = Random.Range(newRoom.Y, newRoom.Y + newRoom.Height);
 
-            if (x==newRoom.x || x==newRoom.x+newRoom.width-1 || y==newRoom.y || y == newRoom.y + newRoom.height-1)
+            if (x==newRoom.X || x==newRoom.X+newRoom.Width-1 || y==newRoom.Y || y == newRoom.Y + newRoom.Height-1)
             {
                 continue;
             }
