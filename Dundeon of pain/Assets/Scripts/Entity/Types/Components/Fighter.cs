@@ -2,17 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fighter : MonoBehaviour
+[RequireComponent(typeof(Actor))]
+sealed class Fighter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int maxHp, hp, defence, power;
+    [SerializeField] private Actor target;
+
+    public int Hp
     {
-        
+        get => hp; set
+        {
+            hp=Mathf.Max(0,Mathf.Min(value,maxHp));
+            if (hp == 0)
+            {
+                Die();
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public int Defence { get => defence; }
+    public int Power { get => power; }
+    public Actor Target { get => target; set => target = value; }
+
+    private void Die()
     {
-        
+        if (GetComponent<Player>())
+        {
+            Degug.Log("Вы сыграли в ящик");
+        }
+        else
+        {
+            Debug.Log($"{name} скопытился");
+        }
+
+        SpriteRenderer spriteRenderer = GetComponent<spriteRenderer>();
+        spriteRenderer.sprite = GameManager.instance.DeadSprite;
+        spriteRenderer.color=new Color(191,0,0,1);
+        spriteRenderer.sortingOrder = 0;
+
+        name = $"Ошметки {name}";
+        GetComponent<Actor>().BlocksMovement = false;
+        if (!GetComponent<Player>())
+        {
+            GameManager.instance.RemoveActor(this.GetComponent<Actor>());
+        }
     }
 }

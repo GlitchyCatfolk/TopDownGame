@@ -16,25 +16,43 @@ public class Actor : Entity
 
     public bool IsAlive { get => isAlivet; }
 
+    private void OnValidate()
+    {
+        if (GetComponent<AI>())
+        {
+            aI = GetComponent<AI>();
+        }
+    }
 
     void Start()
     {
-        if (isSentient)
+        AddToGameManager();
+        if (GetComponent<Player>())
         {
-            if (GetComponent<Player>())
-            {
-                GameManager.instance.InsertEntity(this, 0);
-            }
-            else
-            {
-                GameManager.instance.AddEntity(this);
-            }
+            GameManager.instance.InsertActor(this, 0);
         }
-
-        fieldOfView = new List<Vector3Int>();
+        else
+        {
+            GameManager.instance.AddActor(this);
+        }
+        
         algorithm = new AdamMilVisibility();
         UpdateFieldOfView();
 
+    }
+
+    public void UpdateFieldOfView()
+    {
+        Vector3Int gridPosition=MapManager.instance.FloorMap.WorldToCell(transform.position);
+
+        fieldOfView.Clear();
+        algorithm.Compute(gridPosition, fieldOfViewRange, fieldOfView);
+
+        if (GetComponent<Player>())
+        {
+            MapManager.instance.UpdateFogMap();
+            MapManager.instance.SetEntitiesVisibilities();
+        }
     }
 
 }
