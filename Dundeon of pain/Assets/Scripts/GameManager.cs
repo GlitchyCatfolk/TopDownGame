@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [SerializeField] private float time = 0.1f;
+    [SerializeField] private float baseTime = 0.1f;
 
     [SerializeField] private float delayTime;
 
@@ -48,13 +48,13 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (actors[actorNum].GetComponent<HostileEntity>())
+            if (actors[actorNum].GetComponent<HostileEnemy>())
             {
-                actors[actorNum].GetComponent<HostileEntity>().RunAI();
+                actors[actorNum].GetComponent<HostileEnemy>().RunAI();
             }
             else
             {
-                Actions.SkipAction();
+                Action.SkipAction();
             }
         }
     }
@@ -98,13 +98,13 @@ public class GameManager : MonoBehaviour
         delayTime = SetTime();
     }
 
-    public void InsertEntity(Actor actor, int index)
+    public void InsertActor(Actor actor, int index)
     {
         actors.Insert(index, actor);
         delayTime = SetTime();
     }
 
-    public void RemoveActors(Actor actor)
+    public void RemoveActor(Actor actor)
     {
         actors.Remove(actor);
         delayTime = SetTime();
@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
     {
         foreach(Actor actor in entities)
         {
-            if (fctor.BlocksMovement && actor.transform.position == location)
+            if (actor.BlocksMovement && actor.transform.position == location)
             {
                 return actor;
             }
@@ -122,5 +122,5 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
-    private void SetTime() => baseTime / actors.count;
+    private float SetTime() => baseTime / actors.Count;
 }

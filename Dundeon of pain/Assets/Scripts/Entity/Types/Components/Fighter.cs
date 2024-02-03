@@ -28,14 +28,14 @@ sealed class Fighter : MonoBehaviour
     {
         if (GetComponent<Player>())
         {
-            Degug.Log("Вы сыграли в ящик");
+            Debug.Log("Вы сыграли в ящик");
         }
         else
         {
             Debug.Log($"{name} скопытился");
         }
 
-        SpriteRenderer spriteRenderer = GetComponent<spriteRenderer>();
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = GameManager.instance.DeadSprite;
         spriteRenderer.color=new Color(191,0,0,1);
         spriteRenderer.sortingOrder = 0;

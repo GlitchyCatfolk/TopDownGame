@@ -10,7 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1177113068652316559}
   - component: {fileID: 3861559438167333374}
-  - component: {fileID: 8615795119930166639}
+  - component: {fileID: 3824523381264826941}
+  - component: {fileID: 345627908158276247}
+  - component: {fileID: -3975875477550176478}
+  - component: {fileID: 6226113174243333246}
   m_Layer: 0
   m_Name: Werewoof
   m_TagString: Untagged
@@ -85,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8615795119930166639
+--- !u!114 &3824523381264826941
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,10 +97,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 457501922962160096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91b1713077838294aa3017ff0a1d2f99, type: 3}
+  m_Script: {fileID: 11500000, guid: caf2bf29c2576514c89bfdd0910e8fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSentient: 1
   blocksMovement: 1
+  isAlive: 1
   fieldOfViewRange: 8
   fieldOfView: []
+  aI: {fileID: 6226113174243333246}
+--- !u!114 &345627908158276247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457501922962160096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36b940d6f9f6794e87836880472e363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 16
+  hp: 16
+  defence: 1
+  power: 4
+  target: {fileID: 0}
+--- !u!114 &-3975875477550176478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457501922962160096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 528ca2dcb3969f9428e38f7a1c61dba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6226113174243333246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457501922962160096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd54d8c0f67e2945876a287e6684e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aStar: {fileID: -3975875477550176478}
+  fighter: {fileID: 345627908158276247}
+  isFighting: 0

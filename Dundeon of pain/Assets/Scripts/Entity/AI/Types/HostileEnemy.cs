@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Fighter))]
-public class HostileEnenmy : AI
+public class HostileEnemy : AI
 {
     [SerializeField] private Fighter fighter;
 
@@ -15,11 +15,11 @@ public class HostileEnenmy : AI
         AStar = GetComponent<AStar>();
     }
 
-    public void RunAi()
+    public void RunAI()
     {
         if (!isFighting)
         {
-            fighter.Target = GameManager.instance.actors[0];
+            fighter.Target = GameManager.instance.Actors[0];
         }
         else if (fighter.Target&&!fighter.Target.IsAlive)
         {

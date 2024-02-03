@@ -14,7 +14,7 @@ static public class Action
 
         if (target)
         {
-            MeleeAction(target);
+            MeleeAction(actor, target);
             return false;
         }
         else

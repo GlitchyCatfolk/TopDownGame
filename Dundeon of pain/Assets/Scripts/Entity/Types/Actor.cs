@@ -14,7 +14,9 @@ public class Actor : Entity
 
     AdamMilVisibility algorithm;
 
-    public bool IsAlive { get => isAlivet; }
+    public bool IsAlive { get => isAlive; }
+
+    public List<Vector3Int> FieldOfView { get => fieldOfView; }
 
     private void OnValidate()
     {
@@ -50,7 +52,7 @@ public class Actor : Entity
 
         if (GetComponent<Player>())
         {
-            MapManager.instance.UpdateFogMap();
+            MapManager.instance.UpdateFogMap(fieldOfView);
             MapManager.instance.SetEntitiesVisibilities();
         }
     }
