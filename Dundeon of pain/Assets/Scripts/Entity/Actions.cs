@@ -30,14 +30,25 @@ static public class Action
 
         string attackDesc = $"{actor} атаковал {target}";
 
+        string colorHex = "";
+
+        if (actor.GetComponent<Player>())
+        {
+            colorHex = "#ffffff";
+        }
+        else
+        {
+            colorHex = "#d1a3a4";
+        }
+
         if (damage > 0)
         {
-            Debug.Log($"{attackDesc}, нанеся {damage} урона");
+            UIManager.instance.AddMessage($"{attackDesc}, нанеся {damage} урона", colorHex);
             target.GetComponent<Fighter>().Hp-=damage;
         }
         else
         {
-            Debug.Log($"{attackDesc}, но не нанес урона");
+            UIManager.instance.AddMessage($"{attackDesc}, но не нанес урона", colorHex);
         }
         GameManager.instance.EndTurn();
     }

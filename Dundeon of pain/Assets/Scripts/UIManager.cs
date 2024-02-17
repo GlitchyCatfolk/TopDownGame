@@ -6,6 +6,8 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
+
     [SerializeField] private Slider hpSlider;
 
     [SerializeField] private TextMeshProUGUI hpSliderText;
@@ -26,7 +28,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance==null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -52,4 +54,55 @@ public class UIManager : MonoBehaviour
         messageHistory.SetActive(!messageHistory.activeSelf);
         isMessageHistoryOpen = messageHistory.activeSelf;
     }
+
+    public void AddMessage(string newMessage, string colorHex)
+    {
+        if (lastMessage == newMessage)
+        {
+            TextMeshProUGUI messageHistoryLastChild = messageHistoryContent.transform.GetChild(messageHistoryContent.transform.childCount - 1).GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI lastFiveHistoryLastChild = lastFiveMessagesContent.transform.GetChild(lastFiveMessagesContent.transform.childCount - 1).GetComponent<TextMeshProUGUI>();
+            messageHistoryLastChild.text = $"{newMessage} (x{++sameMessageCount})";
+            lastFiveHistoryLastChild.text = $"{newMessage} (x{sameMessageCount})";
+            return;
+        } 
+        else if (sameMessageCount > 0)
+        {
+            sameMessageCount= 0;
+        }
+
+        lastMessage = newMessage;
+
+        TextMeshProUGUI messagePrefab = Instantiate(Resources.Load<TextMeshProUGUI>("Message")) as TextMeshProUGUI;
+        messagePrefab.text = newMessage;
+        messagePrefab.color = GetColorFromHex(colorHex);
+        messagePrefab.transform.SetParent(messageHistoryContent.transform, false);
+
+        for (int i = 0; i < lastFiveMessagesContent.transform.childCount; i++)
+        {
+            if (messageHistoryContent.transform.childCount - 1 < i)
+            {
+                return;
+            }
+
+            TextMeshProUGUI lastFiveHistoryChild = lastFiveMessagesContent.transform.GetChild(lastFiveMessagesContent.transform.childCount - 1 - i).GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI messageHistoryChild = messageHistoryContent.transform.GetChild(messageHistoryContent.transform.childCount - 1 - i).GetComponent<TextMeshProUGUI>();
+            lastFiveHistoryChild.text = messageHistoryChild.text;
+            lastFiveHistoryChild.color = messageHistoryChild.color;
+        }
+    }
+
+    private Color GetColorFromHex(string v)
+    {
+        Color color;
+        if (ColorUtility.TryParseHtmlString(v, out color))
+        {
+            return color;
+        }
+        else
+        {
+            Debug.Log("GetColorFromHex: Could not parse color from string");
+            return Color.white;
+        }
+    }
 }
+
