@@ -12,6 +12,8 @@ public class Actor : Entity
 
     [SerializeField] private AI aI;
 
+    [SerializeField] private Inventory inventory;
+
     AdamMilVisibility algorithm;
 
     public bool IsAlive { get => isAlive; }
