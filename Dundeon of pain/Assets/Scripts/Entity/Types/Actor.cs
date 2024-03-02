@@ -20,11 +20,18 @@ public class Actor : Entity
 
     public List<Vector3Int> FieldOfView { get => fieldOfView; }
 
+    public Inventory Inventory { get=> inventory; }
+
     private void OnValidate()
     {
         if (GetComponent<AI>())
         {
             aI = GetComponent<AI>();
+        }
+
+        if (GetComponent<Inventory>())
+        {
+            inventory = GetComponent<Inventory>();
         }
     }
 

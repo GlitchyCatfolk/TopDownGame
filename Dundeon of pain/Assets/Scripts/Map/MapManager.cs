@@ -20,6 +20,8 @@ public class MapManager : MonoBehaviour
 
     [SerializeField] private int maxMonstersPerRoom = 2;
 
+    [SerializeField] private int maxItemsPerRoom = 2;
+
 
     //[Header("Tiles")]
 
@@ -72,7 +74,7 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         ProcGen procGen = new ProcGen();
-        procGen.GenerateDungeon(width, height, roomMaxSize, roomMinSize, maxRooms, maxMonstersPerRoom, rooms);
+        procGen.GenerateDungeon(width, height, roomMaxSize, roomMinSize, maxRooms, maxMonstersPerRoom, maxItemsPerRoom, rooms);
 
         AddTileMapToDictionary(floorMap);
         AddTileMapToDictionary(obstacleMap);
@@ -98,6 +100,9 @@ public class MapManager : MonoBehaviour
                 break;
             case "Werewoof":
                 Instantiate(Resources.Load<GameObject>("Werewoof"), new Vector3(position.x + 0.5f, position.y + 0.5f, 0), Quaternion.identity).name = "Werewoof";
+                break;
+            case "Potion of Health":
+                Instantiate(Resources.Load<GameObject>("Potion of Health"), new Vector3(position.x + 0.5f, position.y + 0.5f, 0), Quaternion.identity).name = "Potion of Health";
                 break;
             default:
                 Debug.LogError("Сущность не найдена");

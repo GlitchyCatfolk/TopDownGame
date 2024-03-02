@@ -32,20 +32,19 @@ public class Player : MonoBehaviour, Controls.IPlayerActions
     void Controls.IPlayerActions.OnExit(InputAction.CallbackContext context)
     {
         if (context.performed)
-            Action.EscapeAction();
+            UIManager.instance.ToggleMenu();
     }
 
     public void OnView(InputAction.CallbackContext context)
     {
         if (context.performed)
-        {
-            UIManager.instance.ToggleMessageHistory();
-        }
+            if (!UIManager.instance.IsMenuOpen || UIManager.instance.IsMessageHistoryOpen)
+                UIManager.instance.ToggleMessageHistory();
     }
 
     private void FixedUpdate()
     {
-        if (!UIManager.instance.IsMessageHistoryOpen)
+        if (!UIManager.instance.IsMenuOpen)
         {
             if (GameManager.instance.IsPlayerTurn && moveKeyHeld && GetComponent<Actor>().IsAlive)
                 MovePlayer();
