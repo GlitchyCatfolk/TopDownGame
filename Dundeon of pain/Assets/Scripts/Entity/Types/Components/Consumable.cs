@@ -22,8 +22,10 @@ public class Consumable : MonoBehaviour
     {
         switch (consumableType)
         {
-            case ConsumableType.Healing: return Healing(actor, item);
-            default: return false;
+            case ConsumableType.Healing: 
+                return Healing(actor, item);
+            default: 
+                return false;
         }
     }
 
@@ -46,7 +48,7 @@ public class Consumable : MonoBehaviour
 
     private void Consume(Actor actor, Item item)
     {
-        actor.Inventory.Item.Remove(item);
+        actor.Inventory.Items.Remove(item);
         Destroy(item.gameObject);
     }
 }

@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
 
     public Actor GetBlockingActorAtLocation(Vector3 location)
     {
-        foreach(Actor actor in entities)
+        foreach(Actor actor in Actors)
         {
             if (actor.BlocksMovement && actor.transform.position == location)
             {

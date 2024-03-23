@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &457501922962160096
+--- !u!1 &6294923110954059859
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,26 +8,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1177113068652316559}
-  - component: {fileID: 3861559438167333374}
-  - component: {fileID: 3824523381264826941}
-  - component: {fileID: 345627908158276247}
-  - component: {fileID: -3975875477550176478}
-  - component: {fileID: 6226113174243333246}
+  - component: {fileID: 2482777853743113873}
+  - component: {fileID: 793235530551550048}
+  - component: {fileID: 2559781179353707940}
+  - component: {fileID: 8870169773624924}
   m_Layer: 0
-  m_Name: Werewoof
+  m_Name: Potion of Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1177113068652316559
+--- !u!4 &2482777853743113873
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 457501922962160096}
+  m_GameObject: {fileID: 6294923110954059859}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -36,13 +34,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &3861559438167333374
+--- !u!212 &793235530551550048
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 457501922962160096}
+  m_GameObject: {fileID: 6294923110954059859}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -76,9 +74,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 335837487
   m_SortingLayer: 3
-  m_SortingOrder: 2
-  m_Sprite: {fileID: -164799610, guid: 94a14551feb300143bfb18c453a7f14c, type: 3}
-  m_Color: {r: 0.7311321, g: 1, b: 0.7747562, a: 1}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: -431373062, guid: 94a14551feb300143bfb18c453a7f14c, type: 3}
+  m_Color: {r: 1, g: 0, b: 0.8074565, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -88,65 +86,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3824523381264826941
+--- !u!114 &2559781179353707940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 457501922962160096}
+  m_GameObject: {fileID: 6294923110954059859}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caf2bf29c2576514c89bfdd0910e8fb7, type: 3}
+  m_Script: {fileID: 11500000, guid: 979bcb33576ddef4bbb861502741c897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blocksMovement: 1
-  isAlive: 1
-  fieldOfViewRange: 8
-  fieldOfView: []
-  aI: {fileID: 6226113174243333246}
-  inventory: {fileID: 0}
---- !u!114 &345627908158276247
+  blocksMovement: 0
+  consumable: {fileID: 8870169773624924}
+--- !u!114 &8870169773624924
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 457501922962160096}
+  m_GameObject: {fileID: 6294923110954059859}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a36b940d6f9f6794e87836880472e363, type: 3}
+  m_Script: {fileID: 11500000, guid: a96aa582c41019c4a865dd656dd561c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 16
-  hp: 16
-  defence: 1
-  power: 4
-  target: {fileID: 0}
---- !u!114 &-3975875477550176478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 457501922962160096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 528ca2dcb3969f9428e38f7a1c61dba4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6226113174243333246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 457501922962160096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dd54d8c0f67e2945876a287e6684e69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aStar: {fileID: -3975875477550176478}
-  fighter: {fileID: 345627908158276247}
-  isFighting: 0
+  consumableType: 0
+  amount: 4

@@ -13,7 +13,7 @@ static public class Action
 
             if (actor.Inventory.Items.Count >= actor.Inventory.Capacity)
             {
-                UIManager.instanse.AddMessage("Места больше нет", "#808080");
+                UIManager.instance.AddMessage("Места больше нет", "#808080");
                 return;
             }
 
@@ -21,7 +21,7 @@ static public class Action
             item.transform.SetParent(actor.transform);
             actor.Inventory.Items.Add(item);
 
-            UIManager.instanse.AddMessage($"Ты подобрал {item.name}", "#ffffff");
+            UIManager.instance.AddMessage($"Ты подобрал {item.name}", "#ffffff");
             GameManager.instance.RemoveEntity(item);
             GameManager.instance.EndTurn();
         }
@@ -30,7 +30,7 @@ static public class Action
     static public void DropAction(Actor actor, Item item)
     {
         actor.Inventory.Drop(item);
-        UImanager.instance.ToggleDropMenu();
+        UIManager.instance.ToggleDropMenu();
         GameManager.instance.EndTurn();
     }
 
@@ -42,7 +42,7 @@ static public class Action
 
         if (item.GetComponent<Consumable>())
         {
-            itemUsed = item.GetComponent<Consumable>.Activate(actor, item);
+            itemUsed = item.GetComponent<Consumable>().Activate(actor, item);
         }
 
         if (!itemUsed)
@@ -50,7 +50,7 @@ static public class Action
             return;
         }
 
-        UIManager.ToggleInventory();
+        UIManager.instance.ToggleInventory();
         GameManager.instance.EndTurn();
     }
 

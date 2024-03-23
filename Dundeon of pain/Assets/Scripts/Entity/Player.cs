@@ -42,6 +42,50 @@ public class Player : MonoBehaviour, Controls.IPlayerActions
                 UIManager.instance.ToggleMessageHistory();
     }
 
+    public void OnPickup(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Action.PickupAction(GetComponent<Actor>());
+        }
+    }
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if(!UIManager.instance.IsMenuOpen || UIManager.instance.IsInventoryOpen)
+            {
+                if (GetComponent<Inventory>().Items.Count > 0)
+                {
+                    UIManager.instance.ToggleInventory(GetComponent<Actor>());
+                }
+                else
+                {
+                    UIManager.instance.AddMessage("Ваш инвентарь пуст", "#808080");
+                }
+            }
+        }
+    }
+
+    public void OnDrop(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (!UIManager.instance.IsMenuOpen || UIManager.instance.IsDropMenuOpen)
+            {
+                if (GetComponent<Inventory>().Items.Count > 0)
+                {
+                    UIManager.instance.ToggleDropMenu(GetComponent<Actor>());
+                }
+                else
+                {
+                    UIManager.instance.AddMessage("Вы не можете ничего бросить", "#808080");
+                }
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!UIManager.instance.IsMenuOpen)
